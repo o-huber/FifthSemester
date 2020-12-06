@@ -23,36 +23,6 @@ class funcIntF {
     }
 }
 
-class funcDoubleF {
-    public static void main(String[] args) throws InterruptedException {
-        int x = Integer.parseInt(args[0]);
-        System.out.println(DoubleOps.funcF(x));
-    }
-}
-
-class funcConjF {
-    public static void main(String[] args) throws InterruptedException {
-        int x = Integer.parseInt(args[0]);
-        if(Conjunction.funcF(x)){
-            System.out.println(1);
-        }
-        else{
-            System.out.println(0);
-        }
-    }
-}
-
-class funcDisjF {
-    public static void main(String[] args) throws InterruptedException {
-        int x = Integer.parseInt(args[0]);
-        if(Disjunction.funcF(x)){
-            System.out.println(1);
-        }
-        else{
-            System.out.println(0);
-        }
-    }
-}
 
 class funcIntG {
     public static void main(String[] args) throws InterruptedException {
@@ -61,34 +31,55 @@ class funcIntG {
     }
 }
 
-class funcDoubleG {
+class myFuncF{
     public static void main(String[] args) throws InterruptedException {
         int x = Integer.parseInt(args[0]);
-        System.out.println(DoubleOps.funcG(x));
+        switch(x){
+            case 1:
+                System.out.println(x);
+            case 2:
+                Thread.sleep(5000);
+                System.out.println(x);
+            case 3:
+                System.out.println(0);
+            case 4:
+                Thread.sleep(5000);
+                System.out.println(x);
+            case 5:
+                System.out.println(x);
+            case 6:
+                Thread.sleep(5000);
+                System.out.println(x);
+            default:
+                System.out.println(x);
+        }
+        System.out.println(x);
     }
 }
 
-class funcConjG {
+class myFuncG{
     public static void main(String[] args) throws InterruptedException {
         int x = Integer.parseInt(args[0]);
-        if(Conjunction.funcG(x)){
-            System.out.println(1);
+        switch(x){
+            case 1:
+                Thread.sleep(5000);
+                System.out.println(x);
+            case 2:
+                System.out.println(x);
+            case 3:
+                Thread.sleep(5000);
+                System.out.println(0);
+            case 4:
+                System.out.println(x);
+            case 5:
+                Thread.sleep(5000);
+                System.out.println(x);
+            case 6:
+                System.out.println(x);
+            default:
+                System.out.println(x);
         }
-        else{
-            System.out.println(0);
-        }
-    }
-}
-
-class funcDisjG {
-    public static void main(String[] args) throws InterruptedException {
-        int x = Integer.parseInt(args[0]);
-        if(Disjunction.funcG(x)){
-            System.out.println(1);
-        }
-        else{
-            System.out.println(0);
-        }
+        System.out.println(x);
     }
 }
 
@@ -98,35 +89,23 @@ public class Main {
         long startTime = System.nanoTime();
         Scanner scn = new Scanner(System.in);
 
-        System.out.println("Enter desirable func (1 - IntOps, 2 - DoubleOps, 3 - Conjunction, 4 - Disjunction");
+        System.out.println("Enter desirable func (0 - function from library, 1 to 6 - variants of testing from task document (custom function))");
         int choice = scn.nextInt();
 
         String className;
-        switch (choice){
-            case 1:
-                className = "com.company.funcInt";
-                break;
-            case 2:
-                className = "com.company.funcDouble";
-                break;
-            case 3:
-                className = "com.company.funcConj";
-                break;
-            case 4:
-                className = "com.company.funcDisj";
-                break;
-            default:
-                System.out.println("Entered wrong choice, app will use IntOps");
-                className = "com.company.funcInt";
-                choice = 1;
-                break;
+        int x;
+
+        if(choice == 0){
+            className = "com.company.funcInt";
+            System.out.println("Enter integer X");
+            x = scn.nextInt();
         }
-
-        System.out.println("Enter integer X");
-        int x = scn.nextInt();
-
-        File tempF = new File("D:\\Merger\\tempF.txt");
-        File tempG = new File("D:\\Merger\\tempG.txt");
+        else{
+            className = "com.company.myFunc";
+            x = choice;
+        }
+        File tempF = new File("D:\\tempF.txt");
+        File tempG = new File("D:\\tempG.txt");
 
         ProcessBuilder builder = new ProcessBuilder("C:\\Program Files\\Java\\jdk-14.0.2\\bin\\java", "-cp", "D:\\Merger\\out\\production\\Merger;D:\\Merger\\lab1.jar", className + "F", Integer.toString(x));
         builder.redirectErrorStream(true);
